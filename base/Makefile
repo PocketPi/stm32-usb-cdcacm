@@ -2,7 +2,7 @@ PROJECT = base
 BUILD_DIR = bin
 
 SHARED_DIR = ../shared
-CFILES = my-main.c
+CFILES = main.c
 CFILES += api.c
 AFILES += api-asm.S
 
