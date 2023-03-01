@@ -1,10 +1,9 @@
 PROJECT = base
 BUILD_DIR = bin
 
-SHARED_DIR = ../shared
 CFILES = main.c
-CFILES += api.c
-AFILES += api-asm.S
+CFILES += hw_init.c
+CFILES += sleep.c
 
 # TODO - you will need to edit these two lines!
 DEVICE=stm32f411ce
