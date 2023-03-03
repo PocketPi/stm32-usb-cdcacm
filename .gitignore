@@ -2,5 +2,6 @@ bin/
 *.elf
 *.bin
 generated.*.ld
+*.map
 
 .vscode/

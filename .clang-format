@@ -21,3 +21,5 @@ IncludeCategories:
     Priority:        1
     CaseSensitive:   false
 AlignEscapedNewlines: Left
+InsertTrailingCommas: Wrapped
+BinPackArguments: false

@@ -4,9 +4,11 @@ BUILD_DIR = bin
 CFILES = main.c
 CFILES += hw_init.c
 CFILES += sleep.c
+CFILES += usb.c
+CFILES += buffered_printf.c
 
 # TODO - you will need to edit these two lines!
-DEVICE=stm32f411ce
+DEVICE=stm32f411ceu6
 OOCD_FILE = board/stm32f4discovery.cfg
 
 # You shouldn't have to edit anything below here.
