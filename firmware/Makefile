@@ -1,4 +1,4 @@
-PROJECT = base
+PROJECT = firmware
 BUILD_DIR = bin
 
 CFILES = main.c

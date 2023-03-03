@@ -12,7 +12,7 @@ int main(void) {
         printf("Hello world: %d\n", i++);
 
         gpio_toggle(GPIOC, GPIO13); /* LED on/off */
-        msleep(500);
+        msleep(50);
     }
     return 0;
 }
