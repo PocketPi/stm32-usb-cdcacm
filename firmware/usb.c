@@ -5,6 +5,10 @@
 #include <libopencm3/usb/usbd.h>
 #include <stddef.h>
 
+#define DEVICE_ID_ADDR 0x1FFF7A10
+
+static char serialno[9] = {0};
+
 usbd_device *usb_device;
 
 static const struct usb_device_descriptor dev = {
@@ -144,7 +148,7 @@ static const struct usb_config_descriptor config = {
 static const char *usb_strings[] = {
     "SOUNDBOKS",
     "STROMBOKS",
-    "1337",
+    serialno,
 };
 
 /* Buffer to be used for control requests. */
@@ -206,7 +210,23 @@ static void cdcacm_set_config(usbd_device *usbd_dev, uint16_t wValue) {
     usbd_register_sof_callback(usbd_dev, cdcacm_sof_callback);
 }
 
+static void serialno_read(char *buf) {
+    volatile uint32_t *DEVICE_ID = (volatile uint32_t *)DEVICE_ID_ADDR;
+    const uint32_t uid = *DEVICE_ID + *(DEVICE_ID + 1) + *(DEVICE_ID + 2);
+
+    /* Fetch serial number from chip's unique ID. */
+    for (int i = 0; i < 8; i++)
+        buf[7 - i] = ((uid >> (4 * i)) & 0xF) + '0';
+
+    for (int i = 0; i < 8; i++)
+        if (buf[i] > '9')
+            buf[i] += 'A' - '9' - 1;
+    buf[8] = 0;
+}
+
 void usb_setup(void) {
+    serialno_read(serialno);
+
     usb_device = usbd_init(&otgfs_usb_driver, &dev, &config, usb_strings, 3, usbd_control_buffer, sizeof(usbd_control_buffer));
 
     usbd_register_set_config_callback(usb_device, cdcacm_set_config);

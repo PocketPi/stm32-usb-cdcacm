@@ -15,6 +15,6 @@ void sys_tick_handler(void) {
 /* sleep for delay milliseconds */
 void msleep(uint32_t delay) {
     uint32_t wake = system_millis + delay;
-    while (wake > system_millis)
-        ;
+    while (wake > system_millis) {
+    };
 }
